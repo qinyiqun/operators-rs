@@ -5,11 +5,12 @@ edition = "2021"
 authors = ["YdrMaster <ydrml@hotmail.com>"]
 
 [features]
-default = ["common-cpu", "opencl", "nvidia-gpu", "ascend"]
+default = ["common-cpu", "opencl", "nvidia-gpu", "ascend", "mthreads-gpu"]
 common-cpu = ["gemm"]
 opencl = ["clrt"]
 nvidia-gpu = ["cuda", "cublas", "nccl", "libloading"]
 ascend = ["ascendcl"]
+mthreads-gpu = ["mudrv"]
 
 [dependencies]
 ndarray-layout.workspace = true
@@ -30,11 +31,17 @@ libloading = { version = "0.8", optional = true }
 
 ascendcl = { workspace = true, optional = true }
 
+mudrv = { workspace = true, optional = true }
+
+
+
 [build-dependencies]
 build-script-cfg = "0.0"
 search-cl-tools.workspace = true
 search-cuda-tools.workspace = true
 search-ascend-tools.workspace = true
+search-musa-tools.workspace = true
+bindgen.workspace = true
 
 [dev-dependencies]
 gemm = "0.18"

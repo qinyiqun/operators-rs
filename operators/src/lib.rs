@@ -43,6 +43,11 @@ pub use handle::ascend;
 #[cfg(use_ascend)]
 pub extern crate ascendcl;
 
+#[cfg(use_musa)]
+pub extern crate mudrv;
+#[cfg(use_musa)]
+pub use handle::mthreads_gpu;
+
 use rearrange::Rearrange;
 use std::{marker::PhantomData, ops::DerefMut, ptr::addr_eq};
 
