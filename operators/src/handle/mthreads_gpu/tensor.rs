@@ -83,9 +83,8 @@ pub fn create_tensor_decriptor(
     shape: &mut Vec<u64>,
     stride: &mut Vec<i64>,
     ty: DigitLayout,
-) -> *mut *mut TensorDescriptor {
-    let desc: infiniopTensorDescriptor_t = std::ptr::null_mut();
-    let desc_ptr = Box::into_raw(Box::new(desc)) as *mut _;
+) -> infiniopTensorDescriptor_t {
+    let mut desc: infiniopTensorDescriptor_t = std::ptr::null_mut();
     let ndim = shape.len();
     if stride.is_empty() {
         let mut stride_ = calculate_strides(shape);
@@ -97,7 +96,7 @@ pub fn create_tensor_decriptor(
             let dt_num = 84542721u32;
             let dt: DataLayout = unsafe { std::mem::transmute(dt_num) };
             infiniops!(infiniopCreateTensorDescriptor(
-                desc_ptr,
+                &mut desc,
                 ndim as u64,
                 shape.as_mut_ptr(),
                 stride.as_mut_ptr(),
@@ -108,7 +107,7 @@ pub fn create_tensor_decriptor(
             let dt_num = 135727361u32;
             let dt: DataLayout = unsafe { std::mem::transmute(dt_num) };
             infiniops!(infiniopCreateTensorDescriptor(
-                desc_ptr,
+                &mut desc,
                 ndim as u64,
                 shape.as_mut_ptr(),
                 stride.as_mut_ptr(),
@@ -119,7 +118,7 @@ pub fn create_tensor_decriptor(
             let dt_num = 2099201u32;
             let dt: DataLayout = unsafe { std::mem::transmute(dt_num) };
             infiniops!(infiniopCreateTensorDescriptor(
-                desc_ptr,
+                &mut desc,
                 ndim as u64,
                 shape.as_mut_ptr(),
                 stride.as_mut_ptr(),
@@ -130,7 +129,7 @@ pub fn create_tensor_decriptor(
             let dt_num = 4198401u32;
             let dt: DataLayout = unsafe { std::mem::transmute(dt_num) };
             infiniops!(infiniopCreateTensorDescriptor(
-                desc_ptr,
+                &mut desc,
                 ndim as u64,
                 shape.as_mut_ptr(),
                 stride.as_mut_ptr(),
@@ -139,12 +138,12 @@ pub fn create_tensor_decriptor(
         }
         _ => {}
     }
-    desc_ptr
+    desc
 }
 
 pub fn create_tensor_decriptor_from_tensorlayout(
     tensor_layout: &TensorLayout,
-) -> *mut *mut TensorDescriptor {
+) -> infiniopTensorDescriptor_t {
     let (mut a_shape, mut a_stride) = get_shape_stride(tensor_layout).unwrap();
     create_tensor_decriptor(&mut a_shape, &mut a_stride, tensor_layout.dt())
 }

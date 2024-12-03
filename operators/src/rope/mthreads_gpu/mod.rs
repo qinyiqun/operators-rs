@@ -137,10 +137,10 @@ impl crate::Operator for Operator {
         infiniops!(infiniopCreateRoPEDescriptor(
             handle,
             &mut op_desc,
-            *t_desc_ptr,
-            *p_desc_ptr,
-            *sin_desc_ptr,
-            *cos_desc_ptr
+            t_desc_ptr,
+            p_desc_ptr,
+            sin_desc_ptr,
+            cos_desc_ptr
         ));
         let mut worksize: u64 = 0;
         infiniops!(infiniopGetRoPEWorkspaceSize(op_desc, &mut worksize));

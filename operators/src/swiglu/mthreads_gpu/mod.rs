@@ -65,9 +65,9 @@ impl crate::Operator for Operator {
         infiniops!(infiniopCreateSwiGLUDescriptor(
             handle,
             &mut op_desc,
-            *a_desc_ptr,
-            *a_desc_ptr,
-            *b_desc_ptr
+            a_desc_ptr,
+            a_desc_ptr,
+            b_desc_ptr
         ));
         infiniops!(infiniopSwiGLU(
             op_desc,

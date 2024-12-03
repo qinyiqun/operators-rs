@@ -68,9 +68,9 @@ impl crate::Operator for Operator {
         infiniops!(infiniopCreateRMSNormDescriptor(
             handle,
             &mut op_desc,
-            *y_desc_ptr,
-            *x_desc_ptr,
-            *w_desc_ptr,
+            y_desc_ptr,
+            x_desc_ptr,
+            w_desc_ptr,
             *epsilon
         ));
         let mut worksize: u64 = 0;

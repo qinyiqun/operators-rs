@@ -65,8 +65,8 @@ impl crate::Operator for Operator {
         infiniops!(infiniopCreateRearrangeDescriptor(
             handle,
             &mut op_desc,
-            *dst_desc_ptr,
-            *src_desc_ptr
+            dst_desc_ptr,
+            src_desc_ptr
         ));
         infiniops!(infiniopRearrange(
             op_desc,

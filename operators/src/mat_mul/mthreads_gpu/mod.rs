@@ -66,10 +66,10 @@ impl crate::Operator for Operator {
         infiniops!(infiniopCreateMatmulDescriptor(
             handle,
             &mut op_desc,
-            *c_desc_ptr,
+            c_desc_ptr,
             alpha,
-            *a_desc_ptr,
-            *b_desc_ptr,
+            a_desc_ptr,
+            b_desc_ptr,
             beta
         ));
         let mut worksize: u64 = 0;

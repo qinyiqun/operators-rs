@@ -65,7 +65,7 @@ impl crate::Operator for Operator {
         infiniops!(infiniopCreateCausalSoftmaxDescriptor(
             handle,
             &mut op_desc,
-            *a_desc_ptr
+            a_desc_ptr
         ));
         let mut worksize: u64 = 0;
         infiniops!(infiniopGetCausalSoftmaxWorkspaceSize(
