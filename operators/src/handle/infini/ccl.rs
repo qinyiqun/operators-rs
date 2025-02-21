@@ -28,6 +28,14 @@ impl InfiniNode {
         Self::new(indices, DeviceType::DEVICE_ASCEND)
     }
 
+    pub fn metax_gpu(indices: &[c_uint]) -> Vec<Self> {
+        Self::new(indices, DeviceType::DEVICE_METAX)
+    }
+
+    pub fn mthreads_gpu(indices: &[c_uint]) -> Vec<Self> {
+        Self::new(indices, DeviceType::DEVICE_MTHREADS)
+    }
+
     fn new(indices: &[c_uint], ty: DeviceType) -> Vec<Self> {
         let confused: infini_rt::DeviceType = unsafe { std::mem::transmute(ty) };
         if let &[id] = indices {
