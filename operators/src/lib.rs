@@ -21,6 +21,7 @@ pub mod rearrange;
 pub mod rms_norm;
 pub mod rope;
 pub mod swiglu;
+pub mod random_sample_infini;
 
 pub use common::*;
 

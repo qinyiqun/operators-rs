@@ -22,5 +22,5 @@ pub mod common_cpu;
 pub mod cuda;
 #[cfg(use_infini)]
 pub mod infini;
-#[cfg(use_cl)]
-pub mod opencl;
+// #[cfg(use_cl)]
+// pub mod opencl;

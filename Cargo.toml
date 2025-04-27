@@ -3,13 +3,18 @@ members = ["operators"]
 resolver = "2"
 
 [workspace.dependencies]
-clrt = { git = "https://github.com/InfiniTensor/clrt", rev = "984ac7a" }
-search-cl-tools = { git = "https://github.com/InfiniTensor/clrt", rev = "984ac7a" }
+#clrt = { git = "https://github.com/InfiniTensor/clrt", rev = "984ac7a" }
+#search-cl-tools = { git = "https://github.com/InfiniTensor/clrt", rev = "984ac7a" }
 
-infini-rt = { git = "https://github.com/InfiniTensor/infini-toolkit", rev = "e8362c3" }
-infini-op = { git = "https://github.com/InfiniTensor/infini-toolkit", rev = "e8362c3" }
-infini-ccl = { git = "https://github.com/InfiniTensor/infini-toolkit", rev = "e8362c3" }
-search-infini-tools = { git = "https://github.com/InfiniTensor/infini-toolkit", rev = "e8362c3" }
+infini-rt = { git = "https://github.com/qinyiqun/infini-toolkit", rev = "11c91b0" }
+infini-op = { git = "https://github.com/qinyiqun/infini-toolkit", rev = "11c91b0" }
+infini-ccl = { git = "https://github.com/qinyiqun/infini-toolkit", rev = "11c91b0" }
+search-infini-tools = { git = "https://github.com/qinyiqun/infini-toolkit", rev = "11c91b0" }
+
+#infini-rt = { path = "/home/qinyiqun/infini-toolkit/infini-rt" }
+#infini-op = { path = "/home/qinyiqun/infini-toolkit/infini-op" }
+#infini-ccl = { path = "/home/qinyiqun/infini-toolkit/infini-ccl" }
+#search-infini-tools = { path = "/home/qinyiqun/infini-toolkit/search-infini-tools" }
 
 cuda = { git = "https://github.com/YdrMaster/cuda-driver", rev = "f3ffbcc" }
 cublas = { git = "https://github.com/YdrMaster/cuda-driver", rev = "f3ffbcc" }

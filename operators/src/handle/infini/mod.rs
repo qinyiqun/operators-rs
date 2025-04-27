@@ -53,7 +53,6 @@ impl Device {
                     infini_rt::DEVICE_CAMBRICON => Ty::DevCambriconMlu,
                     infini_rt::DEVICE_ASCEND => Ty::DevAscendNpu,
                     infini_rt::DEVICE_METAX => Ty::DevMetaxGpu,
-                    infini_rt::DEVICE_MTHREADS => Ty::DevMthreadsGpu,
                     _ => unreachable!("unknown device type"),
                 },
                 id as _,
