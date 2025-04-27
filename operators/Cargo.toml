@@ -5,12 +5,11 @@ edition = "2021"
 authors = ["YdrMaster <ydrml@hotmail.com>"]
 
 [features]
-default = ["common-cpu", "opencl", "infini", "nvidia-gpu", "iluvatar-gpu"]
+default = ["common-cpu", "infini"]
 common-cpu = ["gemm"]
-opencl = ["clrt"]
 infini = ["infini-rt", "infini-op", "infini-ccl"]
-nvidia-gpu = ["cuda", "cublas", "nccl", "fslock", "libloading"]
-iluvatar-gpu = ["cuda", "cublas", "fslock", "libloading"]
+#nvidia-gpu = ["cuda", "cublas", "nccl", "fslock", "libloading"]
+#iluvatar-gpu = ["cuda", "cublas", "fslock", "libloading"]
 
 [dependencies]
 digit-layout = "0.2"
@@ -24,24 +23,24 @@ log = "0.4"
 
 gemm = { version = "0.18", optional = true }
 
-clrt = { workspace = true, optional = true }
+#clrt = { workspace = true, optional = true }
 
 infini-rt = { workspace = true, optional = true }
 infini-op = { workspace = true, optional = true }
 infini-ccl = { workspace = true, optional = true }
 
-cuda = { workspace = true, optional = true }
-cublas = { workspace = true, optional = true }
-nccl = { workspace = true, optional = true }
-fslock = { version = "0.2", optional = true }
-libloading = { version = "0.8", optional = true }
+#cuda = { workspace = true, optional = true }
+#cublas = { workspace = true, optional = true }
+#nccl = { workspace = true, optional = true }
+#fslock = { version = "0.2", optional = true }
+#libloading = { version = "0.8", optional = true }
 
 [build-dependencies]
 build-script-cfg = "0.0"
-search-cl-tools.workspace = true
+#search-cl-tools.workspace = true
 search-infini-tools.workspace = true
-search-cuda-tools.workspace = true
-search-corex-tools.workspace = true
+#search-cuda-tools.workspace = true
+#search-corex-tools.workspace = true
 
 [dev-dependencies]
 ggus = "0.4"

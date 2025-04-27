@@ -181,7 +181,8 @@ where
         fn layout(shape: [usize; 3], strides: [isize; 3]) -> ArrayLayout<3> {
             ArrayLayout::new(&shape, &strides, 0)
         }
-        let qx = layout([nh, seq, dh], [nh_sq, seq_sq, dh_sq]).merge_be(0, 2);
+        let qx: Option<ArrayLayout<3>> =
+            layout([nh, seq, dh], [nh_sq, seq_sq, dh_sq]).merge_be(0, 2);
         let k_layout = layout([nkvh, att, dh], [nkvh_sk, att_sk, dh_sk]).transpose(&[2, 1]);
 
         let q_size = if qx.is_none() { nh * seq * dh * ele } else { 0 };
