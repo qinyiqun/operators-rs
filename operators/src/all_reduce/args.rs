@@ -1,6 +1,6 @@
-﻿use super::ReduceOp;
+use super::ReduceOp;
 use crate::{
-    rearrange, shape_mismatch, strides_not_support, utils::type_distinct, Hardware, LaunchError,
+    Hardware, LaunchError, rearrange, shape_mismatch, strides_not_support, utils::type_distinct,
 };
 use digit_layout::DigitLayout;
 

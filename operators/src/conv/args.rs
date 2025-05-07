@@ -1,6 +1,6 @@
 use crate::{
-    utils::{dim_distinct, rank_error, type_distinct},
     ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout,
+    utils::{dim_distinct, rank_error, type_distinct},
 };
 use digit_layout::DigitLayout;
 

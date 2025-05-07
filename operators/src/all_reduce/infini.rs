@@ -1,8 +1,8 @@
-﻿use super::{args::Meta, AllReduce, Args, ReduceOp};
+use super::{AllReduce, Args, ReduceOp, args::Meta};
 use crate::{
+    ByteOf, LaunchError, QueueAlloc,
     infini::{Device, InfiniNode},
     rearrange::{self, infini::Operator as Rearrange},
-    ByteOf, LaunchError, QueueAlloc,
 };
 use digit_layout::types as ty;
 use infini_ccl::bindings::InfiniDataType_t;

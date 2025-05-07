@@ -1,14 +1,15 @@
 use super::{Args, LayerNorm};
 use crate::{
-    cuda::{dt_name, Gpu, Handle, ModuleBox},
+    ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
+    cuda::{Gpu, Handle, ModuleBox, dt_name},
     layer_norm::args::Meta,
-    shape_not_support, strides_not_support, ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
+    shape_not_support, strides_not_support,
 };
 use cuda::params;
 use digit_layout::DigitLayout;
 use lru::LruCache;
 use std::{
-    ffi::{c_uint, CString},
+    ffi::{CString, c_uint},
     sync::{Arc, Mutex},
 };
 
@@ -219,8 +220,8 @@ mod test {
     use crate::{Hardware, Operator as _, TensorLayout};
     use core::f32;
     use digit_layout::{
-        types::{F16, F32, F64},
         DigitLayout,
+        types::{F16, F32, F64},
     };
 
     #[allow(clippy::too_many_arguments)]

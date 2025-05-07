@@ -1,15 +1,16 @@
-use super::{args::Meta, Args, FusedSoftmax};
+use super::{Args, FusedSoftmax, args::Meta};
 use crate::{
-    fuesd_softmax::args::AttnMask,
-    opencl::{ClDevice, CodeGen, KernelCache, CL2_0},
-    strides_not_support, ByteOf, LaunchError, QueueAlloc,
+    ByteOf, LaunchError, QueueAlloc,
     SchemeDiversity::Low as LowDiversity,
+    fuesd_softmax::args::AttnMask,
+    opencl::{CL2_0, ClDevice, CodeGen, KernelCache},
+    strides_not_support,
 };
 use clrt::{
-    bindings::{cl_int, cl_uint},
     Context,
+    bindings::{cl_int, cl_uint},
 };
-use digit_layout::{types as Ty, DigitLayout};
+use digit_layout::{DigitLayout, types as Ty};
 use lru::LruCache;
 use std::sync::Mutex;
 
@@ -164,10 +165,10 @@ mod test {
     fn test_compute() {
         use super::{super::common_cpu::Operator as RefOp, Operator};
         use crate::{
+            Operator as _,
             common_cpu::{Cpu, ThisThread},
             opencl::ClDevice,
             test_utils::{Diff, ErrorCollector},
-            Operator as _,
         };
         use clrt::Platform;
         use digit_layout::types as ty;

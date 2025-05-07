@@ -1,8 +1,9 @@
-﻿use super::{args::Meta, AllReduce, Args, ReduceOp};
+use super::{AllReduce, Args, ReduceOp, args::Meta};
 use crate::{
+    ByteOf, LaunchError, QueueAlloc, TopoNode,
     broadcast::{self, common_cpu::Operator as Broadcast},
     common_cpu::{Cpu, InprocNode},
-    rearrange, ByteOf, LaunchError, QueueAlloc, TopoNode,
+    rearrange,
 };
 use digit_layout::DigitLayout;
 use half::{bf16, f16};
@@ -138,7 +139,7 @@ fn sum<T: AddAssign + Clone>(len: usize, buf: *mut u8, src: *const u8) {
 
 #[test]
 fn test_comm() {
-    use crate::{common_cpu::ThisThread, Operator as _, TensorLayout};
+    use crate::{Operator as _, TensorLayout, common_cpu::ThisThread};
     use digit_layout::types::U32;
 
     InprocNode::new(4)

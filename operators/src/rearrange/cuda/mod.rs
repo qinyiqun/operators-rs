@@ -1,9 +1,10 @@
 use cuda::params;
 
-use super::{args::Scheme, Args, Rearrange};
+use super::{Args, Rearrange, args::Scheme};
 use crate::{
+    ByteOf, LaunchError, QueueAlloc,
     cuda::{Gpu, Handle, ModuleBox},
-    rank_not_support, shape_not_support, ByteOf, LaunchError, QueueAlloc,
+    rank_not_support, shape_not_support,
 };
 use std::{
     ffi::CString,
@@ -195,7 +196,7 @@ extern "C" __global__ void {NAME}(
 mod test {
     use super::{Args, Gpu, Operator};
     use crate::{ConstPtr, Hardware, MutPtr, Operator as _, TensorLayout};
-    use digit_layout::{types as ty, DigitLayout};
+    use digit_layout::{DigitLayout, types as ty};
 
     fn args<H: Hardware>(
         dt: DigitLayout,

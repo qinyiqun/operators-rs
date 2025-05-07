@@ -1,6 +1,6 @@
 use crate::{
-    rank_mismatch, shape_mismatch, shape_not_support, utils::type_distinct, ConstPtr, Hardware,
-    LaunchError, MutPtr, TensorLayout,
+    ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout, rank_mismatch, shape_mismatch,
+    shape_not_support, utils::type_distinct,
 };
 use digit_layout::DigitLayout;
 use itertools::izip;

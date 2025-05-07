@@ -1,6 +1,6 @@
-use super::{args::Meta, Args, Indices, KVPair, RandomSample, SampleArgs};
+use super::{Args, Indices, KVPair, RandomSample, SampleArgs, args::Meta};
 use crate::{
-    common_cpu::Cpu, strides_not_support, type_not_support, ByteOf, LaunchError, QueueAlloc,
+    ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu, strides_not_support, type_not_support,
 };
 use half::f16;
 use num_traits::Float;

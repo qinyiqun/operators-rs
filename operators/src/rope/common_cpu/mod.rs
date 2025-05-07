@@ -1,6 +1,6 @@
-use super::{args::Meta, fill_pos, Args, Rope, Seq, SinCosTable};
-use crate::{common_cpu::Cpu, strides_not_support, ByteOf, LaunchError, QueueAlloc, Unsigned};
-use digit_layout::{types as ty, DigitLayout};
+use super::{Args, Rope, Seq, SinCosTable, args::Meta, fill_pos};
+use crate::{ByteOf, LaunchError, QueueAlloc, Unsigned, common_cpu::Cpu, strides_not_support};
+use digit_layout::{DigitLayout, types as ty};
 use half::f16;
 
 pub struct Operator;

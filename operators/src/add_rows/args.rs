@@ -1,7 +1,6 @@
 use crate::{
-    type_not_support,
+    ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout, type_not_support,
     utils::{dim_distinct, rank_error, type_distinct},
-    ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout,
 };
 use digit_layout::{DigitLayout, LayoutContent::Unsigned};
 use std::ptr::{null, null_mut};

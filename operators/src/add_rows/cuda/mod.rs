@@ -1,10 +1,10 @@
 use super::{AddRows, Args};
 use crate::{
+    ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
     add_rows::args::Meta,
-    cuda::{dt_name, Gpu, Handle, ModuleBox},
+    cuda::{Gpu, Handle, ModuleBox, dt_name},
     strides_not_support,
     utils::gcd,
-    ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
 };
 use cuda::params;
 use digit_layout::DigitLayout;
@@ -144,11 +144,11 @@ extern "C" __global__ void {name}(
 #[cfg(test)]
 mod test {
     use super::{Args, Gpu, Operator};
-    use crate::{cuda::cast_load, Hardware, Operator as _, TensorLayout};
+    use crate::{Hardware, Operator as _, TensorLayout, cuda::cast_load};
     use cuda::memcpy_d2h;
     use digit_layout::{
-        types::{F16, F64, U32},
         DigitLayout,
+        types::{F16, F64, U32},
     };
     use half::f16;
 

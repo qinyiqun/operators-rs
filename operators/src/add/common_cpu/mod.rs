@@ -1,5 +1,5 @@
-﻿use super::{args::Scheme, Add, Args};
-use crate::{common_cpu::Cpu, ByteOf, LaunchError, QueueAlloc};
+use super::{Add, Args, args::Scheme};
+use crate::{ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu};
 use digit_layout::types as ty;
 use half::f16;
 use rayon::iter::{IntoParallelIterator, ParallelIterator};

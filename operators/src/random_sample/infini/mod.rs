@@ -1,8 +1,8 @@
-use super::{args::Meta, common_cpu::Operator as RefOp, Args, Indices, RandomSample};
+use super::{Args, Indices, RandomSample, args::Meta, common_cpu::Operator as RefOp};
 use crate::{
+    ByteOf, LaunchError, QueueAlloc,
     common_cpu::{Cpu, ThisThread},
     infini::Device,
-    ByteOf, LaunchError, QueueAlloc,
 };
 use std::{ptr::null, slice::from_raw_parts};
 
@@ -78,10 +78,10 @@ impl crate::Operator for Operator {
 #[test]
 fn test_compute() {
     use super::args::SampleArgs;
-    use super::{common_cpu::Operator as RefOp, KVPair};
+    use super::{KVPair, common_cpu::Operator as RefOp};
     use crate::{
-        common_cpu::{Cpu, ThisThread},
         Operator as _,
+        common_cpu::{Cpu, ThisThread},
     };
     use digit_layout::types as ty;
     use rand::Rng;

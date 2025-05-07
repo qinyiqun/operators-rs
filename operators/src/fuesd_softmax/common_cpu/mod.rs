@@ -1,8 +1,8 @@
 use super::{
-    args::{AttnMask, Meta},
     Args, FusedSoftmax,
+    args::{AttnMask, Meta},
 };
-use crate::{common_cpu::Cpu, ByteOf, LaunchError, QueueAlloc};
+use crate::{ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu};
 use half::f16;
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
 

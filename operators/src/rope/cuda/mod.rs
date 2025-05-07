@@ -1,10 +1,10 @@
-use super::{args::Meta, fill_pos, Args, Rope, Seq, SinCosTable};
+use super::{Args, Rope, Seq, SinCosTable, args::Meta, fill_pos};
 use crate::{
+    Blob, ByteOf, LaunchError, QueueAlloc,
     cuda::{Gpu, Handle, ModuleBox},
-    shape_not_support, strides_not_support, type_not_support, Blob, ByteOf, LaunchError,
-    QueueAlloc,
+    shape_not_support, strides_not_support, type_not_support,
 };
-use digit_layout::{types as ty, DigitLayout};
+use digit_layout::{DigitLayout, types as ty};
 use std::{ffi::CString, sync::Arc};
 
 pub struct Operator {
@@ -170,8 +170,8 @@ mod test {
     use super::{Args, Gpu, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
     use digit_layout::{
-        types::{F16, F64, U32},
         DigitLayout,
+        types::{F16, F64, U32},
     };
 
     #[allow(clippy::too_many_arguments)]

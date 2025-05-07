@@ -1,7 +1,8 @@
-use super::{args::Meta, Args, RmsNorm};
+use super::{Args, RmsNorm, args::Meta};
 use crate::{
-    cuda::{dt_name, Gpu, Handle, ModuleBox},
-    shape_not_support, strides_not_support, ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
+    ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
+    cuda::{Gpu, Handle, ModuleBox, dt_name},
+    shape_not_support, strides_not_support,
 };
 use cuda::params;
 use digit_layout::DigitLayout;
@@ -201,8 +202,8 @@ mod test {
     use super::{Args, Gpu, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
     use digit_layout::{
-        types::{F16, F32, F64},
         DigitLayout,
+        types::{F16, F32, F64},
     };
 
     fn args<H: Hardware>(

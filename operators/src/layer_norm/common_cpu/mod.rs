@@ -1,7 +1,7 @@
-use super::{args::Meta, Args, LayerNorm};
-use crate::{common_cpu::Cpu, ByteOf, LaunchError, QueueAlloc};
+use super::{Args, LayerNorm, args::Meta};
+use crate::{ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu};
 use half::f16;
-use num_traits::{real::Real, NumCast, ToPrimitive};
+use num_traits::{NumCast, ToPrimitive, real::Real};
 use std::ops::AddAssign;
 
 pub struct Operator;

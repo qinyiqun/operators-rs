@@ -1,14 +1,15 @@
-﻿//! ref: <https://zhuanlan.zhihu.com/p/264786866>
+//! ref: <https://zhuanlan.zhihu.com/p/264786866>
 
-use super::{args::Meta, Args, Indices, KVPair, RandomSample};
+use super::{Args, Indices, KVPair, RandomSample, args::Meta};
 use crate::{
-    opencl::{ClDevice, CodeGen, KernelCache, CL2_0},
-    strides_not_support, ByteOf, LaunchError, QueueAlloc,
+    ByteOf, LaunchError, QueueAlloc,
     SchemeDiversity::Low as LowDiversity,
     Workspace,
+    opencl::{CL2_0, ClDevice, CodeGen, KernelCache},
+    strides_not_support,
 };
-use clrt::{bindings::cl_uint, Context};
-use digit_layout::{types as Ty, DigitLayout};
+use clrt::{Context, bindings::cl_uint};
+use digit_layout::{DigitLayout, types as Ty};
 use lru::LruCache;
 use std::sync::Mutex;
 
@@ -181,11 +182,11 @@ struct SchemeKey {
 
 #[test]
 fn test_compute() {
-    use super::{common_cpu::Operator as RefOp, KVPair};
+    use super::{KVPair, common_cpu::Operator as RefOp};
     use crate::{
+        Operator as _,
         common_cpu::{Cpu, ThisThread},
         opencl::ClDevice,
-        Operator as _,
     };
     use clrt::Platform;
     use digit_layout::types as ty;

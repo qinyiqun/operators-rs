@@ -1,5 +1,5 @@
-use super::{args::Meta, Args, Gelu};
-use crate::{common_cpu::Cpu, ByteOf, LaunchError, QueueAlloc};
+use super::{Args, Gelu, args::Meta};
+use crate::{ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu};
 use half::f16;
 
 pub struct Operator;

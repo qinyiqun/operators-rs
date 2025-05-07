@@ -1,10 +1,11 @@
-use super::{args::Scheme, Args, Rearrange};
+use super::{Args, Rearrange, args::Scheme};
 use crate::{
-    opencl::{ClDevice, CodeGen, KernelCache, CL2_0},
-    rank_not_support, ByteOf, LaunchError, QueueAlloc,
+    ByteOf, LaunchError, QueueAlloc,
     SchemeDiversity::Low as LowDiversity,
+    opencl::{CL2_0, ClDevice, CodeGen, KernelCache},
+    rank_not_support,
 };
-use clrt::{bindings::cl_int, Context};
+use clrt::{Context, bindings::cl_int};
 use lru::LruCache;
 use std::slice::{from_raw_parts, from_raw_parts_mut};
 use std::sync::Mutex;
@@ -201,9 +202,9 @@ mod test {
     fn test_compute() {
         use super::{super::common_cpu::Operator as RefOp, Operator};
         use crate::{
+            Operator as _,
             common_cpu::{Cpu, ThisThread},
             opencl::ClDevice,
-            Operator as _,
         };
         use clrt::Platform;
         use digit_layout::types as ty;

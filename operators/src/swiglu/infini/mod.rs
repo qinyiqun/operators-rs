@@ -1,6 +1,6 @@
-use super::{args::Meta, Args, Swiglu};
-use crate::{infini::Device, ByteOf, LaunchError, QueueAlloc};
-use infini_op::{infiniop, AsRaw, Descriptor, Handle};
+use super::{Args, Swiglu, args::Meta};
+use crate::{ByteOf, LaunchError, QueueAlloc, infini::Device};
+use infini_op::{AsRaw, Descriptor, Handle, infiniop};
 use std::sync::Arc;
 
 pub struct Operator(Arc<Handle>);
@@ -71,8 +71,8 @@ mod test {
     use super::{Args, Device, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
     use digit_layout::{
-        types::{F16, F64},
         DigitLayout,
+        types::{F16, F64},
     };
 
     fn args<H: Hardware>(

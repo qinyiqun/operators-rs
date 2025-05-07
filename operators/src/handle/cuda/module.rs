@@ -1,12 +1,12 @@
 use super::{Handle, Key};
 use cuda::{
-    bindings::nvrtcResult, ContextResource, ContextSpore, CurrentCtx, Dim3, KernelFn, ModuleSpore,
-    Ptx, Stream,
+    ContextResource, ContextSpore, CurrentCtx, Dim3, KernelFn, ModuleSpore, Ptx, Stream,
+    bindings::nvrtcResult,
 };
 use log::warn;
 use std::{
-    collections::{hash_map::Entry::Occupied, HashMap},
-    ffi::{c_void, CStr},
+    collections::{HashMap, hash_map::Entry::Occupied},
+    ffi::{CStr, c_void},
     ptr::addr_eq,
     sync::{Arc, OnceLock, RwLock},
 };

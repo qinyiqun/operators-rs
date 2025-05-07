@@ -1,7 +1,7 @@
-use super::{args::Meta, Args, Conv};
+use super::{Args, Conv, args::Meta};
 use crate::{
-    args_not_support, mat_mul, rearrange, strides_not_support, ByteOf, Hardware, LaunchError,
-    QueueAlloc, TensorLayout, Workspace,
+    ByteOf, Hardware, LaunchError, QueueAlloc, TensorLayout, Workspace, args_not_support, mat_mul,
+    rearrange, strides_not_support,
 };
 use ndarray_layout::{ArrayLayout, Endian::BigEndian, MergeArg};
 use std::marker::PhantomData;

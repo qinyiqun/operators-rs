@@ -1,6 +1,6 @@
-use super::{args::Meta, Args, AttnKVCached};
+use super::{Args, AttnKVCached, args::Meta};
 use crate::{
-    attention, rearrange, shape_mismatch, ByteOf, Hardware, LaunchError, QueueAlloc, TensorLayout,
+    ByteOf, Hardware, LaunchError, QueueAlloc, TensorLayout, attention, rearrange, shape_mismatch,
 };
 use ndarray_layout::ArrayLayout;
 use std::marker::PhantomData;

@@ -1,6 +1,6 @@
-use super::{args::Meta, Args, RmsNorm};
-use crate::{infini::Device, ByteOf, LaunchError, QueueAlloc, Workspace};
-use infini_op::{infiniop, AsRaw, Descriptor};
+use super::{Args, RmsNorm, args::Meta};
+use crate::{ByteOf, LaunchError, QueueAlloc, Workspace, infini::Device};
+use infini_op::{AsRaw, Descriptor, infiniop};
 
 pub struct Operator(Device);
 
@@ -86,8 +86,8 @@ mod test {
     use super::{Args, Device, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
     use digit_layout::{
-        types::{F16, F32, F64},
         DigitLayout,
+        types::{F16, F32, F64},
     };
     use rayon::iter::ParallelIterator;
 

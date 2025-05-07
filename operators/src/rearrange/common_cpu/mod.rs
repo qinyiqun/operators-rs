@@ -1,5 +1,5 @@
-﻿use super::{args::Scheme, Args, Rearrange};
-use crate::{common_cpu::Cpu, ByteOf, LaunchError, QueueAlloc};
+use super::{Args, Rearrange, args::Scheme};
+use crate::{ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu};
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
 
 pub struct Operator;

@@ -1,11 +1,11 @@
-use super::{args::SchemeLayout, Args, MatMul};
+use super::{Args, MatMul, args::SchemeLayout};
 use crate::{
-    opencl::{ClDevice, CodeGen, KernelCache, CL2_0},
     ByteOf, LaunchError, QueueAlloc,
     SchemeDiversity::Low as LowDiversity,
+    opencl::{CL2_0, ClDevice, CodeGen, KernelCache},
 };
-use clrt::{bindings::cl_int, Context};
-use digit_layout::{types as Ty, DigitLayout};
+use clrt::{Context, bindings::cl_int};
+use digit_layout::{DigitLayout, types as Ty};
 use lru::LruCache;
 use std::sync::Mutex;
 
@@ -195,10 +195,10 @@ mod test {
     fn test_compute() {
         use super::{super::common_cpu::Operator as RefOp, Operator};
         use crate::{
+            Operator as _,
             common_cpu::{Cpu, ThisThread},
             opencl::ClDevice,
             test_utils::{Diff, ErrorCollector},
-            Operator as _,
         };
         use clrt::Platform;
         use digit_layout::types::{F32, F64};

@@ -1,6 +1,6 @@
-﻿use super::{Args, MatMul};
-use crate::{infini::Device, ByteOf, LaunchError, QueueAlloc, TensorLayout, Workspace};
-use infini_op::{infiniop, AsRaw, Descriptor};
+use super::{Args, MatMul};
+use crate::{ByteOf, LaunchError, QueueAlloc, TensorLayout, Workspace, infini::Device};
+use infini_op::{AsRaw, Descriptor, infiniop};
 
 pub struct Operator(Device);
 
@@ -120,10 +120,10 @@ mod test {
     fn test_compute() {
         use super::{super::common_cpu::Operator as RefOp, Device, Operator};
         use crate::{
+            Operator as _,
             common_cpu::{Cpu, ThisThread},
             infini::cast_load,
             test_utils::{Diff, ErrorCollector},
-            Operator as _,
         };
         use digit_layout::types::{F16, F64};
         use half::f16;

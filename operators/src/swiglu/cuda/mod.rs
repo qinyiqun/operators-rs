@@ -1,14 +1,14 @@
-use super::{args::Meta, Args, Swiglu};
+use super::{Args, Swiglu, args::Meta};
 use crate::{
+    ByteOf, LaunchError, QueueAlloc,
     cuda::{Gpu, Handle, ModuleBox},
     strides_not_support, type_not_support,
     utils::gcd,
-    ByteOf, LaunchError, QueueAlloc,
 };
 use cuda::params;
 use digit_layout::types::F16;
 use std::{
-    ffi::{c_uint, CString},
+    ffi::{CString, c_uint},
     sync::Arc,
 };
 
@@ -106,8 +106,8 @@ mod test {
     use super::{Args, Gpu, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
     use digit_layout::{
-        types::{F16, F64},
         DigitLayout,
+        types::{F16, F64},
     };
 
     fn args<H: Hardware>(

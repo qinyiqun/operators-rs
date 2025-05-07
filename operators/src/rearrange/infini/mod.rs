@@ -1,7 +1,7 @@
-use super::{args::Scheme, Args, Rearrange};
-use crate::{infini::Device, ByteOf, LaunchError, QueueAlloc};
+use super::{Args, Rearrange, args::Scheme};
+use crate::{ByteOf, LaunchError, QueueAlloc, infini::Device};
 use digit_layout::types;
-use infini_op::{infiniop, AsRaw, Descriptor, Handle};
+use infini_op::{AsRaw, Descriptor, Handle, infiniop};
 use std::{
     slice::{from_raw_parts, from_raw_parts_mut},
     sync::Arc,
@@ -80,7 +80,7 @@ impl crate::Operator for Operator {
 mod test {
     use super::{Args, Device, Operator};
     use crate::{ConstPtr, Hardware, MutPtr, Operator as _, TensorLayout};
-    use digit_layout::{types as ty, DigitLayout};
+    use digit_layout::{DigitLayout, types as ty};
 
     fn args<H: Hardware>(
         dt: DigitLayout,

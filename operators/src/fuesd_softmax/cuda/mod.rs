@@ -1,16 +1,17 @@
 use super::{
-    args::{AttnMask, Meta},
     Args, FusedSoftmax,
+    args::{AttnMask, Meta},
 };
 use crate::{
+    ByteOf, LaunchError, QueueAlloc,
     cuda::{Gpu, Handle, ModuleBox},
-    strides_not_support, type_not_support, ByteOf, LaunchError, QueueAlloc,
+    strides_not_support, type_not_support,
 };
 use cuda::params;
 use digit_layout::types::F16;
 use std::{
     collections::HashMap,
-    ffi::{c_float, CString},
+    ffi::{CString, c_float},
     mem::size_of,
     sync::Arc,
 };
@@ -161,7 +162,7 @@ extern "C" __global__ void {folding}(
 mod test {
     use super::{Args, AttnMask, Gpu, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
-    use digit_layout::{types as ty, DigitLayout};
+    use digit_layout::{DigitLayout, types as ty};
 
     fn args<H: Hardware>(
         dt: DigitLayout,

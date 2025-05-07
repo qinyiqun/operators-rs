@@ -9,7 +9,7 @@ mod workspace;
 
 pub use blob::Blob;
 pub use calculator::OffsetCalculator;
-pub use error::{functions::*, LaunchError, LaunchErrorKind};
+pub use error::{LaunchError, LaunchErrorKind, functions::*};
 pub use pool::Pool;
 pub use tensor::TensorLayout;
 pub use unsigned::Unsigned;
@@ -18,7 +18,7 @@ pub use workspace::Workspace;
 pub(crate) use diversity::SchemeDiversity;
 
 pub mod utils {
-    use super::{rank_not_support, type_mismatch, LaunchError};
+    use super::{LaunchError, rank_not_support, type_mismatch};
     use digit_layout::DigitLayout;
 
     #[cfg(any(use_cuda, use_cl))]

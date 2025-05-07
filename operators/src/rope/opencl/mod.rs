@@ -1,11 +1,12 @@
-﻿use super::{args::Meta, fill_pos, Args, Rope, Seq, SinCosTable};
+use super::{Args, Rope, Seq, SinCosTable, args::Meta, fill_pos};
 use crate::{
-    opencl::{ClDevice, CodeGen, KernelCache, CL2_0},
-    shape_not_support, strides_not_support, ByteOf, LaunchError, QueueAlloc,
+    ByteOf, LaunchError, QueueAlloc,
     SchemeDiversity::Low as LowDiversity,
+    opencl::{CL2_0, ClDevice, CodeGen, KernelCache},
+    shape_not_support, strides_not_support,
 };
-use clrt::{bindings::cl_int, Context};
-use digit_layout::{types as Ty, DigitLayout};
+use clrt::{Context, bindings::cl_int};
+use digit_layout::{DigitLayout, types as Ty};
 use lru::LruCache;
 use std::sync::Mutex;
 use std::{alloc::Layout, iter::zip};
@@ -222,8 +223,8 @@ mod test {
     use super::Args;
     use crate::{Hardware, TensorLayout};
     use digit_layout::{
-        types::{F64, U32},
         DigitLayout,
+        types::{F64, U32},
     };
 
     #[allow(clippy::too_many_arguments)]
@@ -255,10 +256,10 @@ mod test {
     fn test_compute() {
         use super::{super::common_cpu::Operator as RefOp, Operator};
         use crate::{
+            Operator as _,
             common_cpu::{Cpu, ThisThread},
             opencl::ClDevice,
             test_utils::{Diff, ErrorCollector},
-            Operator as _,
         };
         use clrt::Platform;
         use digit_layout::types as ty;

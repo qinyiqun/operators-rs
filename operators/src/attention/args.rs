@@ -1,7 +1,7 @@
-﻿use crate::{
+use crate::{
+    ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout,
     fuesd_softmax::AttnMask,
     utils::{dim_distinct, rank_error, type_distinct},
-    ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout,
 };
 use digit_layout::DigitLayout;
 

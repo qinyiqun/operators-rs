@@ -1,13 +1,13 @@
-﻿use super::{args::Meta, Args, Swiglu};
+use super::{Args, Swiglu, args::Meta};
 use crate::{
-    opencl::{ClDevice, CodeGen, KernelCache, CL2_0},
-    strides_not_support,
-    utils::gcd,
     ByteOf, LaunchError, QueueAlloc,
     SchemeDiversity::Low as LowDiversity,
+    opencl::{CL2_0, ClDevice, CodeGen, KernelCache},
+    strides_not_support,
+    utils::gcd,
 };
-use clrt::{bindings::cl_int, Context};
-use digit_layout::{types as Ty, DigitLayout};
+use clrt::{Context, bindings::cl_int};
+use digit_layout::{DigitLayout, types as Ty};
 use lru::LruCache;
 use std::sync::Mutex;
 
@@ -134,8 +134,8 @@ mod test {
     use super::{Args, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
     use digit_layout::{
-        types::{F32, F64},
         DigitLayout,
+        types::{F32, F64},
     };
 
     fn args<H: Hardware>(

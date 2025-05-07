@@ -1,7 +1,8 @@
-use super::{args::Meta, AllReduce, Args, ReduceOp};
+use super::{AllReduce, Args, ReduceOp, args::Meta};
 use crate::{
+    ByteOf, LaunchError, LaunchError, QueueAlloc,
     cuda::{Gpu, NcclNode},
-    rearrange, ByteOf, LaunchError, LaunchError, QueueAlloc,
+    rearrange,
 };
 use std::{
     slice::{from_raw_parts, from_raw_parts_mut},

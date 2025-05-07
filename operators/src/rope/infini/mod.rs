@@ -1,7 +1,7 @@
-use super::{args::Meta, fill_pos, Args, Rope, Seq, SinCosTable};
-use crate::{infini::Device, Blob, ByteOf, LaunchError, QueueAlloc, Workspace};
-use digit_layout::{types as ty, DigitLayout};
-use infini_op::{infiniop, AsRaw, Descriptor};
+use super::{Args, Rope, Seq, SinCosTable, args::Meta, fill_pos};
+use crate::{Blob, ByteOf, LaunchError, QueueAlloc, Workspace, infini::Device};
+use digit_layout::{DigitLayout, types as ty};
+use infini_op::{AsRaw, Descriptor, infiniop};
 
 pub struct Operator(Device);
 
@@ -147,8 +147,8 @@ impl crate::Operator for Operator {
 #[cfg(test)]
 mod test {
     use super::{Args, Device, Operator};
-    use crate::{rope::Rope, Hardware, Operator as _, TensorLayout};
-    use digit_layout::{types as ty, DigitLayout};
+    use crate::{Hardware, Operator as _, TensorLayout, rope::Rope};
+    use digit_layout::{DigitLayout, types as ty};
     use std::ptr::null;
 
     #[allow(clippy::too_many_arguments)]

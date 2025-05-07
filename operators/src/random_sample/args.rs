@@ -1,8 +1,8 @@
 use super::KVPair;
 use crate::{
-    type_not_support, utils::rank_error, ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout,
+    ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout, type_not_support, utils::rank_error,
 };
-use digit_layout::{types as ty, DigitLayout};
+use digit_layout::{DigitLayout, types as ty};
 use std::ptr::{null, null_mut};
 
 pub struct Args<H: Hardware> {

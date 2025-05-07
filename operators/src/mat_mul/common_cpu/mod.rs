@@ -1,5 +1,5 @@
-﻿use super::{args::SchemeLayout, Args, MatMul};
-use crate::{common_cpu::Cpu, type_not_support, ByteOf, LaunchError, QueueAlloc};
+use super::{Args, MatMul, args::SchemeLayout};
+use crate::{ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu, type_not_support};
 
 pub struct Operator;
 

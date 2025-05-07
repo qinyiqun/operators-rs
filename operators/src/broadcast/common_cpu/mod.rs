@@ -1,7 +1,8 @@
-﻿use super::{args::Meta, Args, Broadcast};
+use super::{Args, Broadcast, args::Meta};
 use crate::{
+    ByteOf, LaunchError, QueueAlloc, TopoNode,
     common_cpu::{Cpu, InprocNode},
-    rearrange, ByteOf, LaunchError, QueueAlloc, TopoNode,
+    rearrange,
 };
 use std::ptr::{addr_eq, copy, copy_nonoverlapping};
 
@@ -63,7 +64,7 @@ impl crate::Operator for Operator {
 
 #[test]
 fn test_comm() {
-    use crate::{common_cpu::ThisThread, Operator as _, TensorLayout};
+    use crate::{Operator as _, TensorLayout, common_cpu::ThisThread};
     use digit_layout::types::U32;
 
     InprocNode::new(4)

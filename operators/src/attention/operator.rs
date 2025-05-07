@@ -1,7 +1,7 @@
-use super::{args::Meta, Args, Attention};
+use super::{Args, Attention, args::Meta};
 use crate::{
-    fuesd_softmax, mat_mul, rearrange, ByteOf, Hardware, LaunchError, QueueAlloc, TensorLayout,
-    Workspace,
+    ByteOf, Hardware, LaunchError, QueueAlloc, TensorLayout, Workspace, fuesd_softmax, mat_mul,
+    rearrange,
 };
 use ndarray_layout::ArrayLayout;
 use std::marker::PhantomData;

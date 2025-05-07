@@ -1,5 +1,5 @@
-use super::{args::Meta, Args, RmsNorm};
-use crate::{common_cpu::Cpu, ByteOf, LaunchError, QueueAlloc};
+use super::{Args, RmsNorm, args::Meta};
+use crate::{ByteOf, LaunchError, QueueAlloc, common_cpu::Cpu};
 use half::f16;
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
 

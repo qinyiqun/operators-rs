@@ -1,5 +1,5 @@
-﻿use crate::{
-    rearrange, shape_mismatch, strides_not_support, utils::type_distinct, Hardware, LaunchError,
+use crate::{
+    Hardware, LaunchError, rearrange, shape_mismatch, strides_not_support, utils::type_distinct,
 };
 
 pub struct Args<H: Hardware> {

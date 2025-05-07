@@ -1,12 +1,13 @@
 mod ffi;
 
 use super::{
-    args::{Meta, SampleArgs},
     Args, Indices, RandomSample,
+    args::{Meta, SampleArgs},
 };
 use crate::{
-    cuda::{dt_name, Gpu, Handle},
-    strides_not_support, ByteOf, LaunchError, QueueAlloc, SchemeDiversity, Workspace,
+    ByteOf, LaunchError, QueueAlloc, SchemeDiversity, Workspace,
+    cuda::{Gpu, Handle, dt_name},
+    strides_not_support,
 };
 use cuda::{DevByte, Stream};
 use digit_layout::DigitLayout;
@@ -207,10 +208,10 @@ impl Scheme {
 
 #[test]
 fn test_compute() {
-    use super::{common_cpu::Operator as RefOp, KVPair};
+    use super::{KVPair, common_cpu::Operator as RefOp};
     use crate::{
-        common_cpu::{Cpu, ThisThread},
         Operator as _,
+        common_cpu::{Cpu, ThisThread},
     };
     use cuda::memcpy_d2h;
     use digit_layout::types as ty;

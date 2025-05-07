@@ -1,6 +1,6 @@
-﻿use crate::{
-    rank_mismatch, shape_mismatch, shape_not_support, utils::type_distinct, ConstPtr, Hardware,
-    LaunchError, MutPtr, TensorLayout,
+use crate::{
+    ConstPtr, Hardware, LaunchError, MutPtr, TensorLayout, rank_mismatch, shape_mismatch,
+    shape_not_support, utils::type_distinct,
 };
 use std::{
     cmp::Ordering,

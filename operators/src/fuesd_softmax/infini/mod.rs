@@ -1,8 +1,8 @@
-use super::{args::Meta, Args, FusedSoftmax};
+use super::{Args, FusedSoftmax, args::Meta};
 use crate::{
-    fuesd_softmax::args::AttnMask, infini::Device, ByteOf, LaunchError, QueueAlloc, Workspace,
+    ByteOf, LaunchError, QueueAlloc, Workspace, fuesd_softmax::args::AttnMask, infini::Device,
 };
-use infini_op::{infiniop, AsRaw, Descriptor};
+use infini_op::{AsRaw, Descriptor, infiniop};
 
 pub struct Operator(Device);
 
@@ -75,7 +75,7 @@ impl crate::Operator for Operator {
 mod test {
     use super::{Args, AttnMask, Device, Operator};
     use crate::{Hardware, Operator as _, TensorLayout};
-    use digit_layout::{types as ty, DigitLayout};
+    use digit_layout::{DigitLayout, types as ty};
 
     fn args<H: Hardware>(
         dt: DigitLayout,

@@ -1,4 +1,4 @@
-use crate::{rank_not_support, Hardware, LaunchError, MutPtr, TensorLayout};
+use crate::{Hardware, LaunchError, MutPtr, TensorLayout, rank_not_support};
 use digit_layout::DigitLayout;
 use std::ptr::null_mut;
 

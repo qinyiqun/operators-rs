@@ -1,4 +1,4 @@
-use crate::{utils::rank_error, Hardware, LaunchError, MutPtr, TensorLayout};
+use crate::{Hardware, LaunchError, MutPtr, TensorLayout, utils::rank_error};
 use digit_layout::DigitLayout;
 
 pub struct Args<H: Hardware> {

@@ -3,8 +3,8 @@ impl_op!(cuda, Gpu);
 #[cfg(test)]
 mod test {
     use super::{super::Args, Operator};
-    use crate::{cuda::Gpu, ByteOf, Hardware, Operator as _, TensorLayout};
-    use digit_layout::{types as ty, DigitLayout};
+    use crate::{ByteOf, Hardware, Operator as _, TensorLayout, cuda::Gpu};
+    use digit_layout::{DigitLayout, types as ty};
 
     #[allow(clippy::too_many_arguments)]
     fn args<H: Hardware>(
