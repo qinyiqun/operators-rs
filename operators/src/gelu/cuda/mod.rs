@@ -5,6 +5,7 @@ use crate::{
     utils::gcd,
     ByteOf, LaunchError, QueueAlloc,
 };
+use cuda::params;
 use digit_layout::types::F16;
 use std::{
     ffi::{c_uint, CString},
@@ -60,15 +61,12 @@ impl crate::Operator for Operator {
             return Err(strides_not_support(""));
         };
 
-        let params = cuda::params![base];
         let block = gcd(self.max_threads_block, d);
 
         self.module.launch(
             CString::new(NAME).unwrap(),
-            (n * d).div_ceil(block) as c_uint,
-            block as u32,
-            params.as_ptr(),
-            0,
+            ((n * d).div_ceil(block) as c_uint, block as c_uint, 0),
+            &params![*base].to_ptrs(),
             queue_alloc.queue(),
         );
         Ok(())

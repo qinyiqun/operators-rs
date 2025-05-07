@@ -118,7 +118,7 @@ impl crate::Operator for Operator {
         let dh = dh / 2;
         let st = (st / unit / 2) as i32;
         let sh = (sh / unit / 2) as i32;
-        let params = cuda::params![t_base, st, sh, p_base, theta];
+        let params = cuda::params![*t_base, st, sh, *p_base, *theta];
 
         if self.max_threads_block % dh != 0 {
             return Err(shape_not_support(""));
@@ -130,10 +130,8 @@ impl crate::Operator for Operator {
 
         self.module.launch(
             CString::new(name).unwrap(),
-            (nt as _, nh_h as _),
-            (nh_l as _, dh as _),
-            params.as_ptr(),
-            0,
+            ((nt as _, nh_h as _), (nh_l as _, dh as _), 0),
+            &params.to_ptrs(),
             queue_alloc.queue(),
         );
         Ok(())

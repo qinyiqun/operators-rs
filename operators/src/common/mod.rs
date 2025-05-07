@@ -15,7 +15,7 @@ pub use tensor::TensorLayout;
 pub use unsigned::Unsigned;
 pub use workspace::Workspace;
 
-pub(crate) use diversity::{SchemeCacheSize, SchemeDiversity};
+pub(crate) use diversity::SchemeDiversity;
 
 pub mod utils {
     use super::{rank_not_support, type_mismatch, LaunchError};

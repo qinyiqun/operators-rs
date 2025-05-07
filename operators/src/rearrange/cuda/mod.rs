@@ -1,3 +1,5 @@
+use cuda::params;
+
 use super::{args::Scheme, Args, Rearrange};
 use crate::{
     cuda::{Gpu, Handle, ModuleBox},
@@ -142,7 +144,7 @@ impl crate::Operator for Operator {
         let src_rs = src_rs / unit;
         let src_cs = src_cs / unit;
 
-        let params = cuda::params![
+        let params = params![
             args.dst_base,
             dst_rs,
             dst_cs,
@@ -152,8 +154,12 @@ impl crate::Operator for Operator {
             c,
             bytes_thread
         ];
-        self.module
-            .launch(&name, grid, block, params.as_ptr(), 0, queue_alloc.queue());
+        self.module.launch(
+            &name,
+            (grid, block, 0),
+            &params.to_ptrs(),
+            queue_alloc.queue(),
+        );
         Ok(())
     }
 }

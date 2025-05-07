@@ -4,10 +4,11 @@ use crate::{
     layer_norm::args::Meta,
     shape_not_support, strides_not_support, ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
 };
+use cuda::params;
 use digit_layout::DigitLayout;
 use lru::LruCache;
 use std::{
-    ffi::CString,
+    ffi::{c_uint, CString},
     sync::{Arc, Mutex},
 };
 
@@ -82,17 +83,27 @@ impl crate::Operator for Operator {
 
         let nsy = (nsy / unit) as i32;
         let nsx = (nsx / unit) as i32;
-        let params = cuda::params![y_base, nsy, x_base, nsx, scale_base, bias_base, epsilon];
+        let params = params![
+            *y_base,
+            nsy,
+            *x_base,
+            nsx,
+            *scale_base,
+            *bias_base,
+            *epsilon
+        ];
 
         scheme.module.launch(
             &scheme.name,
-            n as u32,
-            match scheme.ty {
-                SchemeType::Padding => d,
-                SchemeType::Folding { block_size } => block_size,
-            } as u32,
-            params.as_ptr(),
-            0,
+            (
+                n as c_uint,
+                match scheme.ty {
+                    SchemeType::Padding => d,
+                    SchemeType::Folding { block_size } => block_size,
+                } as c_uint,
+                0,
+            ),
+            &params.to_ptrs(),
             queue_alloc.queue(),
         );
 

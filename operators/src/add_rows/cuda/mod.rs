@@ -6,6 +6,7 @@ use crate::{
     utils::gcd,
     ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
 };
+use cuda::params;
 use digit_layout::DigitLayout;
 use lru::LruCache;
 use std::{
@@ -77,7 +78,7 @@ impl crate::Operator for Operator {
         let &[bsi] = cast(&[bsi], unit_idx as usize).as_slice() else {
             todo!()
         };
-        let params = cuda::params![dst_base, src_base, idx_base, bsd, msd, kss, bsi];
+        let params = params![*dst_base, *src_base, *idx_base, bsd, msd, kss, bsi];
         let block = gcd(self.max_threads_block, n);
         let dimx = n.div_ceil(block);
         let key = SchemeKey { dt: dst_layout.dt };
@@ -89,10 +90,8 @@ impl crate::Operator for Operator {
             .clone();
         scheme.module.launch(
             &scheme.name,
-            (b as _, m as _, dimx as _),
-            block as u32,
-            params.as_ptr(),
-            0,
+            ((b as _, m as _, dimx as _), block as u32, 0),
+            &params.to_ptrs(),
             queue_alloc.queue(),
         );
         Ok(())

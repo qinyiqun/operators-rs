@@ -5,8 +5,12 @@ use crate::{
     utils::gcd,
     ByteOf, LaunchError, QueueAlloc,
 };
+use cuda::params;
 use digit_layout::types::F16;
-use std::{ffi::CString, sync::Arc};
+use std::{
+    ffi::{c_uint, CString},
+    sync::Arc,
+};
 
 pub struct Operator {
     _handle: Arc<Handle>,
@@ -68,15 +72,13 @@ impl crate::Operator for Operator {
 
         let sg = (gns / unit) as i32;
         let su = (uns / unit) as i32;
-        let params = cuda::params![gate_base, sg, up_base, su];
+        let params = params![*gate_base, sg, *up_base, su];
         let block = gcd(self.max_threads_block, d);
 
         self.module.launch(
             CString::new(NAME).unwrap(),
-            (n as _, (d / block) as _),
-            block as u32,
-            params.as_ptr(),
-            0,
+            ((n as _, (d / block) as _), block as c_uint, 0),
+            &params.to_ptrs(),
             queue_alloc.queue(),
         );
         Ok(())

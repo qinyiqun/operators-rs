@@ -5,10 +5,11 @@ use crate::{
     utils::gcd,
     ByteOf, LaunchError, QueueAlloc, SchemeDiversity,
 };
+use cuda::params;
 use digit_layout::DigitLayout;
 use lru::LruCache;
 use std::{
-    ffi::{c_uint, CString},
+    ffi::c_uint,
     sync::{Arc, Mutex},
 };
 
@@ -70,18 +71,15 @@ impl crate::Operator for Operator {
             b_base,
             ..
         } = args;
-        let params = cuda::params![c_base, a_base, b_base];
 
         self.schemes
             .lock()
             .unwrap()
             .get_or_insert(dt, || compile(&self.handle, dt))
             .launch(
-                CString::new("add").unwrap(),
-                grid_dims as c_uint,
-                block_dims as c_uint,
-                params.as_ptr(),
-                0,
+                c"add",
+                (grid_dims as c_uint, block_dims as c_uint, 0),
+                &params![*c_base, *a_base, *b_base].to_ptrs(),
                 queue_alloc.queue(),
             );
         Ok(())

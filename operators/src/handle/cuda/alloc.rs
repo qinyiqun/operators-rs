@@ -108,7 +108,7 @@ impl<'ctx> Alloc<DevMem<'ctx>> for Stream<'ctx> {
 
     #[inline]
     fn free(&self, mem: DevMem<'ctx>) {
-        mem.drop_on(self)
+        Stream::free(self, mem);
     }
 }
 

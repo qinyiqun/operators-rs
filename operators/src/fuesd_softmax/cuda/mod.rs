@@ -6,6 +6,7 @@ use crate::{
     cuda::{Gpu, Handle, ModuleBox},
     strides_not_support, type_not_support, ByteOf, LaunchError, QueueAlloc,
 };
+use cuda::params;
 use digit_layout::types::F16;
 use std::{
     collections::HashMap,
@@ -73,15 +74,13 @@ impl crate::Operator for Operator {
         let sh = (sh / unit) as i32;
         let ss = (ss / unit) as i32;
         let att_len = att_len as u32;
-        let params = cuda::params![att_base, 0i32, sh, ss, att_len];
+        let params = params![*att_base, 0i32, sh, ss, att_len];
 
         if att_len <= block_size {
             scheme.module.launch(
                 &scheme.padding,
-                grid_dims,
-                att_len,
-                params.as_ptr(),
-                0,
+                (grid_dims, att_len, 0),
+                &params.to_ptrs(),
                 queue.queue(),
             );
         } else {
@@ -89,10 +88,8 @@ impl crate::Operator for Operator {
             let smem = (num_items_thread * block_size) as usize;
             scheme.module.launch(
                 &scheme.folding,
-                grid_dims,
-                block_size,
-                params.as_ptr(),
-                smem * size_of::<c_float>(),
+                (grid_dims, block_size, smem * size_of::<c_float>()),
+                &params.to_ptrs(),
                 queue.queue(),
             );
         }
