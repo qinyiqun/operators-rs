@@ -1,6 +1,6 @@
 use super::{Args, Broadcast, args::Meta};
 use crate::{
-    ByteOf, LaunchError, LaunchError, QueueAlloc,
+    ByteOf, LaunchError, QueueAlloc,
     cuda::{Gpu, NcclNode},
     rearrange,
 };
@@ -24,14 +24,6 @@ impl crate::Operator for Operator {
         Self {
             nccl: node.nccl.clone(),
         }
-    }
-
-    fn scheme(
-        &mut self,
-        _args: &Self::Args,
-        _max_workspace_size: usize,
-    ) -> Result<usize, LaunchError> {
-        Ok(0)
     }
 
     fn launch<QA>(

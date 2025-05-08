@@ -7,7 +7,6 @@ use crate::{
 use itertools::Itertools;
 use lru::LruCache;
 use std::cmp::max;
-use std::iter::repeat;
 use std::slice::{from_raw_parts, from_raw_parts_mut};
 use std::{
     ffi::CString,
@@ -71,21 +70,11 @@ impl ArrayStruct {
     }
 
     fn try_into_array<const N: usize>(self) -> Result<[ArrayType; N], LaunchError> {
-        if self.0.len() > N {
-            Err(rank_not_support("ArrayStruct::try_into_array"))
+        let ArrayStruct(vec) = self;
+        if vec.len() <= N {
+            Ok(std::array::from_fn(|i| vec.get(i).copied().unwrap_or(0)))
         } else {
-            let ArrayStruct(vec) = self;
-            if vec.len() == N {
-                Ok(vec.try_into().unwrap())
-            } else {
-                let vec_len = vec.len();
-                Ok(vec
-                    .into_iter()
-                    .chain(repeat(0).take(N - vec_len))
-                    .collect::<Vec<_>>()
-                    .try_into()
-                    .unwrap())
-            }
+            Err(rank_not_support("over length"))
         }
     }
 }
@@ -158,7 +147,7 @@ impl crate::Operator for Operator {
             .collect::<Vec<_>>();
 
         //分离维度，分成grid处理的维度和block处理的维度，与dst的维度相对应
-        let mut block_dim_choose = repeat(false).take(ndim).collect::<Vec<_>>();
+        let mut block_dim_choose = vec![false; ndim];
 
         //TODO 需要优化
         let max_block_size = 256;
@@ -596,9 +585,9 @@ mod test {
         let dt = ty::U64;
 
         let cpu_op = RefOp::new(&Cpu);
-        let gpu_op = Operator::new(&gpu);
+        let gpu_op = Operator::new(gpu);
 
-        let mut r_shape: [usize; N] = shape.clone();
+        let mut r_shape = shape;
         r_shape[0..TRANS_N].reverse();
 
         let trans_param: [usize; TRANS_N] =
