@@ -12,8 +12,19 @@ infini-op = { git = "https://github.com/InfiniTensor/infini-toolkit", rev = "e83
 infini-ccl = { git = "https://github.com/InfiniTensor/infini-toolkit", rev = "e8362c3" }
 search-infini-tools = { git = "https://github.com/InfiniTensor/infini-toolkit", rev = "e8362c3" }
 
-cuda = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
-cublas = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
-nccl = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
-search-cuda-tools = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
+#cuda = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
+#cublas = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
+#nccl = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
+#search-cuda-tools = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
 search-corex-tools = { git = "https://github.com/YdrMaster/cuda-driver", rev = "17109a0" }
+
+#cuda = { path = "/workspace/llamacu/cuda-driver/cuda" }
+#cublas = { path = "/workspace/llamacu/cuda-driver/cublas" }
+#nccl = { path = "/workspace/llamacu/cuda-driver/nccl" }
+#search-cuda-tools = { path = "/workspace/llamacu/cuda-driver/search-cuda-tools" }
+
+
+cuda = { git = "https://github.com/qinyiqun/cuda-driver", rev = "0b14e47" }
+cublas = { git = "https://github.com/qinyiqun/cuda-driver", rev = "0b14e47" }
+nccl = { git = "https://github.com/qinyiqun/cuda-driver", rev = "0b14e47" }
+search-cuda-tools = { git = "https://github.com/qinyiqun/cuda-driver", rev = "0b14e47" }

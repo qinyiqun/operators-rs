@@ -26,6 +26,7 @@ pub(super) fn cache_lib(key: &Key, code: impl FnOnce() -> String) -> Arc<Library
 
     static ROOT: LazyLock<PathBuf> = LazyLock::new(|| {
         let user = var(if cfg!(windows) { "USERNAME" } else { "USER" }).unwrap();
+        // let user = "root";
         let root = temp_dir().join(format!("operators-rs-nv-libs-{user}"));
         fs::create_dir_all(&root).unwrap();
         fs::write(root.join("export.h"), include_str!("cxx/export.h")).unwrap();
@@ -34,7 +35,7 @@ pub(super) fn cache_lib(key: &Key, code: impl FnOnce() -> String) -> Arc<Library
 
     let dir = ROOT.join(format!("{}_{}", key.0, key.1));
     let lock = dir.join(".lock");
-    let src = dir.join("src.cu");
+    let src = dir.join("src.maca");
     let lib: PathBuf = if cfg!(windows) {
         dir.join("bin").join("lib.dll")
     } else {
@@ -58,7 +59,7 @@ pub(super) fn cache_lib(key: &Key, code: impl FnOnce() -> String) -> Arc<Library
         !lib.exists()
     } else {
         if cfg!(use_nvidia) {
-            fs::write(dir.join("xmake.lua"), include_str!("cxx/nv.lua")).unwrap();
+            fs::write(dir.join("xmake.lua"), include_str!("cxx/metax.lua")).unwrap();
         } else if cfg!(use_iluvatar) {
             fs::write(dir.join("xmake.lua"), include_str!("cxx/iluvatar.lua")).unwrap();
         } else {
@@ -95,7 +96,11 @@ fn xmake_check() {
 This project requires xmake to build cub device-wide code.
 See [this page](https://xmake.io/#/getting_started?id=installation) to install xmake.";
 
-    match Command::new("xmake").arg("--version").output() {
+    match Command::new("xmake")
+        .arg("--version")
+        // .arg("--root")
+        .output()
+    {
         Ok(output) => {
             if !output.status.success() {
                 let code = output
@@ -117,31 +122,40 @@ See [this page](https://xmake.io/#/getting_started?id=installation) to install x
     }
 }
 #[allow(dead_code)]
-fn xmake_config(dir: impl AsRef<Path>, arch: impl fmt::Display) {
+fn xmake_config(dir: impl AsRef<Path>, _arch: impl fmt::Display) {
     let mut cmd = Command::new("xmake");
 
-    let output = if cfg!(use_nvidia) {
-        cmd.arg("config").arg("--toolchain=cuda");
-        if let Ok(cuda_root) = std::env::var("CUDA_ROOT") {
-            cmd.arg(format!("--cuda={cuda_root}"));
-        }
-        cmd.arg(format!("--cuflags={arch}"))
-            .arg(format!("--culdflags={arch}"))
-            .current_dir(&dir)
-            .stdout(Stdio::piped())
-            .stderr(Stdio::piped())
-            .output()
-            .unwrap()
-    } else if cfg!(use_iluvatar) {
-        cmd.arg("config")
-            .current_dir(&dir)
-            .stdout(Stdio::piped())
-            .stderr(Stdio::piped())
-            .output()
-            .unwrap()
-    } else {
-        unreachable!()
-    };
+    // let output = if cfg!(use_nvidia) {
+    // cmd.arg("config").arg("--toolchain=cuda");
+    // println!("{:?}", cmd);
+    // if let Ok(cuda_root) = std::env::var("CUDA_ROOT") {
+    //     cmd.arg(format!("--cuda={cuda_root}"));
+    // }
+    // cmd.arg(format!("--cuflags={arch}"))
+    //     .arg(format!("--culdflags={arch}"))
+    //     .current_dir(&dir)
+    //     .stdout(Stdio::piped())
+    //     .stderr(Stdio::piped())
+    //     .output()
+    //     .unwrap()
+    let output = cmd
+        .arg("config")
+        // .arg("--root")
+        .current_dir(&dir)
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .output()
+        .unwrap();
+    // } else if cfg!(use_iluvatar) {
+    //     cmd.arg("config")
+    //         .current_dir(&dir)
+    //         .stdout(Stdio::piped())
+    //         .stderr(Stdio::piped())
+    //         .output()
+    //         .unwrap()
+    // } else {
+    //     unreachable!()
+    // };
     let log = read_output(&output);
     if output.status.success() {
         info!("{log}");
@@ -153,6 +167,7 @@ fn xmake_config(dir: impl AsRef<Path>, arch: impl fmt::Display) {
 fn xmake_build(dir: impl AsRef<Path>) {
     let output = Command::new("xmake")
         .arg("build")
+        // .arg("--root")
         .current_dir(&dir)
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
@@ -169,6 +184,7 @@ fn xmake_build(dir: impl AsRef<Path>) {
 fn xmake_install(dir: impl AsRef<Path>) {
     let output = Command::new("xmake")
         .arg("install")
+        // .arg("--root")
         .arg("--installdir=.")
         .current_dir(&dir)
         .stdout(Stdio::piped())
